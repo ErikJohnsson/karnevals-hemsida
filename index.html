@@ -38,6 +38,15 @@
         required
         min="1920-01-01"
       >
+      <fieldset class="seeking" id="seeking-fieldset">
+        <legend class="seeking__legend">Vad söker du i stjärnorna? <span class="seeking__optional">(valfritt)</span></legend>
+        <div class="seeking__options">
+          <button type="button" class="seeking__btn" data-seeking="svar">Svar</button>
+          <button type="button" class="seeking__btn" data-seeking="mod">Mod</button>
+          <button type="button" class="seeking__btn" data-seeking="lugn">Lugn</button>
+          <button type="button" class="seeking__btn" data-seeking="aventyr">Äventyr</button>
+        </div>
+      </fieldset>
       <button type="submit" class="date-form__btn">Läs stjärnorna ✦</button>
     </form>
   </section>
@@ -57,6 +66,7 @@
       <p class="card__personality" id="result-personality"></p>
       <p class="card__section-label">Dagens profetia</p>
       <p class="card__prophecy" id="result-prophecy"></p>
+      <p class="card__seeking" id="result-seeking" hidden></p>
       <p class="card__advice" id="result-advice"></p>
     </article>
     <button id="share-btn" class="share-btn">Dela ditt horoskop ✦</button>
