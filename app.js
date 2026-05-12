@@ -454,14 +454,32 @@ function getSwishUrl() {
 async function shareResult(sign, dateStr) {
   const url = window.location.origin + window.location.pathname + '#' + dateStr;
   const text = `Jag är ${sign.name}! ${sign.symbol} Kolla ditt Centerstudenter-horoskop:`;
+  const card = document.querySelector('.card');
 
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: 'Mitt Centerstudenter-horoskop', text, url });
-      return;
-    } catch (e) {
-      if (e.name === 'AbortError') return;
+  let blob;
+  try {
+    blob = await captureCard(card);
+  } catch {
+    blob = null;
+  }
+
+  if (blob && navigator.share && navigator.canShare) {
+    const file = new File([blob], 'horoskop.png', { type: 'image/png' });
+    const shareData = { title: 'Mitt Centerstudenter-horoskop', text, url, files: [file] };
+    if (navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (e) {
+        if (e.name === 'AbortError') return;
+      }
     }
+  }
+
+  if (blob) {
+    downloadBlob(blob, 'horoskop.png');
+    showToast('Bild sparad!');
+    return;
   }
 
   try {
@@ -470,6 +488,61 @@ async function shareResult(sign, dateStr) {
   } catch {
     showToast('Kunde inte kopiera länken');
   }
+}
+
+function captureCard(card) {
+  const wrapper = document.createElement('div');
+  wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;padding:40px;background:#1a1632;';
+  const clone = card.cloneNode(true);
+  clone.style.cssText = `
+    width:380px;max-width:380px;
+    background:#211e38;
+    border:1px solid #3a3555;
+    border-radius:3px;
+    outline:1px solid #3a3555;
+    outline-offset:5px;
+    box-shadow:none;
+    padding:2.5rem 1.75rem 1.75rem;
+    text-align:center;
+    position:relative;
+  `;
+  clone.querySelectorAll('.card__symbol').forEach(el => {
+    el.style.color = '#d4b062';
+    el.style.textShadow = '0 0 24px rgba(200,170,80,0.25)';
+  });
+  clone.querySelectorAll('.card__name').forEach(el => el.style.color = '#ede9df');
+  clone.querySelectorAll('.card__tagline').forEach(el => el.style.color = '#9a8550');
+  clone.querySelectorAll('.card__section-label').forEach(el => el.style.color = '#6f6b80');
+  clone.querySelectorAll('.card__personality, .card__prophecy').forEach(el => el.style.color = '#a5a0b8');
+  clone.querySelectorAll('.card__advice').forEach(el => el.style.color = '#4a9a6a');
+  clone.querySelectorAll('.card__divider').forEach(el => {
+    el.style.background = 'linear-gradient(90deg, transparent, #2a5040, transparent)';
+  });
+  clone.querySelectorAll('.card__corner').forEach(el => el.style.color = '#9a8550');
+
+  wrapper.appendChild(clone);
+  document.body.appendChild(wrapper);
+
+  return html2canvas(wrapper, {
+    backgroundColor: '#1a1632',
+    scale: 2,
+    useCORS: true,
+    logging: false
+  }).then(canvas => {
+    document.body.removeChild(wrapper);
+    return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+  }).catch(err => {
+    if (wrapper.parentNode) document.body.removeChild(wrapper);
+    throw err;
+  });
+}
+
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 }
 
 function showToast(message) {
