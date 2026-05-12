@@ -156,14 +156,18 @@ section {
   font-family: inherit;
   font-size: 1rem;
   color: var(--text);
-  background: var(--sky-surface);
+  background-color: var(--sky-surface);
   border: 1px solid var(--card-border);
   border-radius: 12px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
+  color-scheme: dark;
   -webkit-appearance: none;
   appearance: none;
-  color-scheme: dark;
+}
+
+.date-form__input::-webkit-date-and-time-value {
+  text-align: left;
 }
 
 .date-form__input:focus {
