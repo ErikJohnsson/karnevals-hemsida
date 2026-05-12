@@ -568,10 +568,8 @@ function showToast(message) {
 function resetForm() {
   const input = document.getElementById('birth-date');
   input.value = '';
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    input.type = 'text';
-    input.placeholder = 'ÅÅÅÅ-MM-DD';
-  }
+  input.type = 'text';
+  input.placeholder = 'åååå-mm-dd';
   window.location.hash = '';
   const resultSection = document.getElementById('result');
   const ctaSection = document.getElementById('cta');
@@ -645,21 +643,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('birth-date');
 
   const today = new Date().toISOString().split('T')[0];
-  const isMobile = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  if (isMobile) {
-    input.type = 'text';
-    input.placeholder = 'ÅÅÅÅ-MM-DD';
-    input.addEventListener('focus', () => {
-      if (input.type !== 'date') input.type = 'date';
-    });
-    input.addEventListener('blur', () => {
-      if (!input.value) {
-        input.type = 'text';
-        input.placeholder = 'ÅÅÅÅ-MM-DD';
-      }
-    });
-  }
+  input.type = 'text';
+  input.placeholder = 'åååå-mm-dd';
+  input.addEventListener('focus', () => {
+    if (input.type !== 'date') input.type = 'date';
+  });
+  input.addEventListener('blur', () => {
+    if (!input.value) {
+      input.type = 'text';
+      input.placeholder = 'åååå-mm-dd';
+    }
+  });
 
   input.max = today;
 
