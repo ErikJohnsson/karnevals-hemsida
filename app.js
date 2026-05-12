@@ -642,18 +642,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const input = document.getElementById('birth-date');
 
   const today = new Date().toISOString().split('T')[0];
-  const isMobile = !window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  if (isMobile) {
-    input.addEventListener('focus', () => {
-      if (input.type !== 'date') input.type = 'date';
-    });
-    input.addEventListener('blur', () => {
-      if (!input.value) input.type = 'text';
-    });
-  } else {
-    input.type = 'date';
-  }
+  input.addEventListener('focus', () => {
+    if (input.type !== 'date') input.type = 'date';
+  });
+  input.addEventListener('blur', () => {
+    if (!input.value) input.type = 'text';
+  });
 
   input.max = today;
 
