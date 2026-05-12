@@ -601,6 +601,7 @@ img.card__corner.card__corner--bl { bottom: 10px; left: 12px; }
 
   .date-form__input {
     flex: 1;
+    min-width: 0;
   }
 
   .date-form__btn {
