@@ -568,6 +568,7 @@ function showToast(message) {
 function resetForm() {
   const input = document.getElementById('birth-date');
   input.value = '';
+  input.type = 'text';
   window.location.hash = '';
   const resultSection = document.getElementById('result');
   const ctaSection = document.getElementById('cta');
@@ -643,6 +644,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const today = new Date().toISOString().split('T')[0];
   input.max = today;
 
+  input.addEventListener('focus', () => {
+    if (input.type !== 'date') input.type = 'date';
+  });
+  input.addEventListener('blur', () => {
+    if (!input.value) input.type = 'text';
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const val = input.value;
@@ -660,6 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.location.hash) {
     const dateStr = window.location.hash.slice(1);
     if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr) && isValidDate(dateStr)) {
+      input.type = 'date';
       input.value = dateStr;
       showResult(dateStr, true);
     }
