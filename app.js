@@ -396,18 +396,19 @@ function createStars() {
   const container = document.getElementById('stars');
   if (!container) return;
   const fragment = document.createDocumentFragment();
-  const count = 120;
+  const count = 160;
   for (let i = 0; i < count; i++) {
     const star = document.createElement('div');
     star.className = 'star';
     star.style.left = Math.random() * 100 + '%';
     star.style.top = Math.random() * 100 + '%';
-    const size = Math.random() * 2 + 1;
+    const isBright = Math.random() > 0.65;
+    const size = isBright ? (Math.random() * 2.5 + 1.5) : (Math.random() * 2 + 0.5);
     star.style.width = size + 'px';
     star.style.height = size + 'px';
-    star.style.animationDelay = Math.random() * 4 + 's';
-    star.style.animationDuration = (2 + Math.random() * 3) + 's';
-    if (Math.random() > 0.7) star.classList.add('star--bright');
+    star.style.animationDelay = Math.random() * 5 + 's';
+    star.style.animationDuration = (2 + Math.random() * 4) + 's';
+    if (isBright) star.classList.add('star--bright');
     fragment.appendChild(star);
   }
   container.appendChild(fragment);
