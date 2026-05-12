@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1632">
+  <meta name="color-scheme" content="dark">
+  <title>Ditt politiska horoskop | Centerstudenter</title>
+  <meta name="description" content="Skriv in ditt födelsedatum och upptäck ditt politiska stjärntecken. Centerstudenter på Lundakarnevalen 2026.">
+  <meta property="og:title" content="Vad säger stjärnorna om din politik?">
+  <meta property="og:description" content="Upptäck ditt Centerstudenter-horoskop på Lundakarnevalen 2026.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="stars" aria-hidden="true"></div>
+
+<main>
+  <!-- Act 1: Hook -->
+  <section class="hero">
+    <img class="hero__clover" src="clover.svg" alt="" aria-hidden="true">
+    <img class="hero__logo" src="logo-white.svg" alt="Centerstudenter">
+    <h1 class="hero__title">Vad säger stjärnorna om din politik?</h1>
+    <p class="hero__sub">Skriv in ditt födelsedatum och upptäck ditt politiska stjärntecken.</p>
+    <noscript><p class="hero__sub">Sidan kräver JavaScript för att fungera. Aktivera JavaScript och ladda om sidan.</p></noscript>
+    <form id="date-form" class="date-form">
+      <label for="birth-date" class="date-form__label">Födelsedatum</label>
+      <input
+        type="date"
+        id="birth-date"
+        class="date-form__input"
+        required
+        min="1920-01-01"
+      >
+      <button type="submit" class="date-form__btn">Läs stjärnorna ✦</button>
+    </form>
+  </section>
+
+  <!-- Act 2: Result -->
+  <section id="result" class="result" hidden aria-live="polite">
+    <article class="card">
+      <div class="card__corner card__corner--tl" aria-hidden="true">✦</div>
+      <img class="card__corner card__corner--tr" src="clover.svg" alt="" aria-hidden="true">
+      <img class="card__corner card__corner--bl" src="clover.svg" alt="" aria-hidden="true">
+      <div class="card__corner card__corner--br" aria-hidden="true">✦</div>
+      <div class="card__symbol" id="result-symbol"></div>
+      <h2 class="card__name" id="result-name"></h2>
+      <p class="card__tagline" id="result-tagline"></p>
+      <div class="card__divider"></div>
+      <p class="card__section-label">Din kosmiska profil</p>
+      <p class="card__personality" id="result-personality"></p>
+      <p class="card__section-label">Dagens profetia</p>
+      <p class="card__prophecy" id="result-prophecy"></p>
+      <p class="card__advice" id="result-advice"></p>
+    </article>
+    <button id="share-btn" class="share-btn">Dela ditt horoskop ✦</button>
+    <button id="retry-btn" class="share-btn retry-btn">Prova ett annat datum ↑</button>
+  </section>
+
+  <!-- Act 3: Conversion -->
+  <section id="cta" class="cta" hidden>
+    <div class="cta__inner">
+      <img class="cta__clover" src="clover.svg" alt="" aria-hidden="true">
+      <p class="cta__lead" id="cta-text"></p>
+
+      <div class="cta__adult">
+        <p class="cta__pitch">Bli medlem i fria tankars hem. 20 kr via Swish.</p>
+        <a id="swish-link" class="cta__swish-btn" href="#">Öppna Swish</a>
+        <p id="swish-hint" class="cta__swish-hint" hidden>Har du inte Swish? Se instruktioner nedan.</p>
+        <div id="swish-qr" class="cta__qr" hidden>
+          <p class="cta__qr-label">Skanna med Swish</p>
+          <picture>
+            <source srcset="qr-swish.avif" type="image/avif">
+            <img class="cta__qr-img" src="qr-swish.png" alt="Swish QR-kod för medlemskap" loading="lazy">
+          </picture>
+        </div>
+        <p class="cta__next-steps">När vi mottagit din betalning får du ett bekräftelsemail inom några dagar.</p>
+        <p class="cta__manual">
+          Eller swisha manuellt:<br>
+          <strong>123 272 16 52</strong><br>
+          Belopp: <strong>20 kr</strong><br>
+          Meddelande: <strong>ditt personnummer + din mailadress</strong>
+        </p>
+        <div class="cta__divider"></div>
+        <p class="cta__fine-print">
+          Du måste vara 18 år för att bli medlem. Ditt personnummer (ÅÅMMDD-XXXX) och din mailadress behövs för att registrera ditt medlemskap och skickas till Centerstudenter.
+          <a href="https://www.centerstudenter.se/integritetspolicy" target="_blank" rel="noopener">Integritetspolicy</a>
+        </p>
+      </div>
+
+      <div class="cta__minor" hidden>
+        <p class="cta__pitch">Du är inte gammal nog att bli medlem ännu, men stjärnorna väntar på dig! Kika in på vår hemsida så länge.</p>
+        <a class="cta__swish-btn" href="https://www.centerstudenter.se" target="_blank" rel="noopener">Besök centerstudenter.se</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <a class="footer__logo-link" href="https://www.centerstudenter.se" target="_blank" rel="noopener" aria-label="Besök Centerstudenter">
+    <img class="footer__logo" src="logo-white.svg" alt="Centerstudenter">
+  </a>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
