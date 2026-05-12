@@ -592,21 +592,6 @@ img.card__corner.card__corner--bl { bottom: 10px; left: 12px; }
     padding: 3rem 2.5rem 2.5rem;
   }
 
-  .date-form {
-    flex-direction: row;
-    max-width: 420px;
-  }
-
-  .date-form__input {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .date-form__btn {
-    width: auto;
-    white-space: nowrap;
-  }
-
   .cta__inner {
     padding: 3rem 2.5rem 2.5rem;
   }
